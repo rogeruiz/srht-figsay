@@ -14,8 +14,8 @@ writeShellApplication {
 
     [ $# -eq 0 ] && usage
 
-    custom_text=""
-    custom_width=""
+    custom_text="example"
+    custom_width="80"
     custom_font=""
     custom_justification=""
 
