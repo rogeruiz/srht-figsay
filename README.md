@@ -2,7 +2,7 @@
 
 This repository contains code which builds a Nix derivation for a custom Shell
 script which leverages `fd`, `ripgrep`, & `figlet` to aid in creating custom
-text output of Figlet fonts with provided text.
+text output of FIGlet fonts with provided text.
 
 ## Usage
 
@@ -44,7 +44,7 @@ Since FIGlet installs a large number of fonts, when discovering new ones you
 should pipe the output into a PAGER such as `less`.
 
 ```sh
->_ figlet -t "hi, there" | less
+>_ figsay -t "hi, there" | less
 ```
 
 ## Building the script locally with Nix
