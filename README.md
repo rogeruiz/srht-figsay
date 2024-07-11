@@ -53,12 +53,12 @@ To build the script locally including all of its dependencies, you can run the
 following `nix-build` command.
 
 ```sh
->_ nix-build figsay.nix
+>_ nix-build default.nix
 ```
 
 To install the script on your machine, you can run the following `nix-env`
 command.
 
 ```sh
->_ nix-env -i -f figsay.nix
+>_ nix-env -i -f default.nix
 ```
