@@ -6,7 +6,7 @@ text output of FIGlet fonts with provided text.
 
 ## Usage
 
-Here's an example which uses the text `hello` and the found `larry3d` with a
+Here's an example which uses the text `hello` and the font `larry3d` with a
 width of `80` and an alignment of `center` below.
 
 ```sh
