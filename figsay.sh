@@ -10,7 +10,7 @@ custom_width="80"
 custom_font=""
 custom_justification=""
 
-while getopts :ht:w:f:clr option; do
+while getopts :ht:w:f:d:clr option; do
   case "${option}" in
   t) # Custom text is required to display anything
     custom_text=${OPTARG}
@@ -20,6 +20,9 @@ while getopts :ht:w:f:clr option; do
     ;;
   f) # Allow for a custom font to be defined too. This disables iterating
     custom_font=${OPTARG}
+    ;;
+  d) # Allow for font directory
+    custom_font_dir=${OPTARG}
     ;;
   c | l | r) # Allow for justification
     custom_justification=${option}
@@ -34,13 +37,19 @@ done
 font_ext='flf'
 font_directory="$(figlet -I 2)"
 
+if [[ -n $custom_font_dir ]]; then
+  font_directory="${custom_font_dir}"
+fi
+
 if [ -z "${custom_font}" ]; then
   # Get a list of all the FIGlet fonts by name
-  for font_path in $(fd . "${font_directory}" --extension "${font_ext}"); do
+  IFS=$'\n'
+  for font_path in $(fd . "${font_directory}" --extension "${font_ext}" --exec basename); do
     # Iterate on each font based on the text input
     # shellcheck disable=SC2030
     output_font=$(
       figlet "-${custom_justification:=x}" \
+        -d "${custom_font_dir}" \
         -w "${custom_width:-}" \
         -f "${font_path}" \
         "${custom_text}" \
@@ -53,9 +62,11 @@ if [ -z "${custom_font}" ]; then
       printf "\n\n\n\n\n"
     fi
   done
+  unset IFS
 else
   # shellcheck disable=SC2031
   figlet "-${custom_justification:=x}" \
+    -d "${custom_font_dir}" \
     -w "${custom_width:-}" \
     -f "${custom_font}" \
     "${custom_text}"
