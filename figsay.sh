@@ -44,7 +44,7 @@ fi
 if [ -z "${custom_font}" ]; then
   # Get a list of all the FIGlet fonts by name
   IFS=$'\n'
-  for font_path in $(fd . "${font_directory}" --extension "${font_ext}" --exec basename); do
+  for font_path in $(fd . "${font_directory}" --extension "${font_ext}" --exec basename | sort); do
     # Iterate on each font based on the text input
     # shellcheck disable=SC2030
     output_font=$(
@@ -64,6 +64,7 @@ if [ -z "${custom_font}" ]; then
   done
   unset IFS
 else
+  printf "\n"
   # shellcheck disable=SC2031
   figlet "-${custom_justification:=x}" \
     -d "${custom_font_dir}" \

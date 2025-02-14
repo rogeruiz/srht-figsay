@@ -54,12 +54,12 @@ To build the script locally including all of its dependencies, you can run the
 following `nix-build` command.
 
 ```sh
->_ nix-build default.nix
+>_ just build
 ```
 
 To install the script on your machine, you can run the following `nix-env`
 command.
 
 ```sh
->_ nix profile install -f default.nix
+>_ just install
 ```
