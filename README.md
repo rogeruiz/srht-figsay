@@ -34,6 +34,7 @@ figsay usage:
         t) # Custom text is required to display anything
         w) # Allow for the width of the figlet to be defined too
         f) # Allow for a custom font to be defined too. This disables iterating
+        d) # Allow for font directory
         c | l | r) # Allow for justification
         h | *) # Display help
 ```
@@ -60,5 +61,5 @@ To install the script on your machine, you can run the following `nix-env`
 command.
 
 ```sh
->_ nix-env -i -f default.nix
+>_ nix profile install -f default.nix
 ```
