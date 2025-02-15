@@ -10,7 +10,7 @@ alias rm := uninstall
 
 [doc('Build the Nix derevation')]
 build:
-    nix-build default.nix
+    nix build
 
 [doc('Uninstall Figsay so it can be installed')]
 uninstall:
@@ -18,4 +18,4 @@ uninstall:
 
 [doc('Install figsay so it can be run anywhere')]
 install:
-    nix profile install -f default.nix
+    nix profile install
