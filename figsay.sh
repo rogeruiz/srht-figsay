@@ -5,10 +5,12 @@ usage() {
 
 [ $# -eq 0 ] && usage
 
+drv_base=$(dirname "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)")
 custom_text="example"
 custom_width="80"
 custom_font=""
 custom_justification=""
+custom_font_dir=""
 
 while getopts :ht:w:f:d:clr option; do
   case "${option}" in
@@ -35,7 +37,7 @@ done
 
 # Get all the FIGlet fonts from the directory of FIGlet fonts
 font_ext='flf'
-font_directory="$(figlet -I 2)"
+font_directory="${drv_base}/share/fonts"
 
 if [[ -n $custom_font_dir ]]; then
   font_directory="${custom_font_dir}"
@@ -44,7 +46,7 @@ fi
 if [ -z "${custom_font}" ]; then
   # Get a list of all the FIGlet fonts by name
   IFS=$'\n'
-  for font_path in $(fd . "${font_directory}" --extension "${font_ext}" --exec basename | sort); do
+  for font_path in $(fd . "${font_directory}" --maxdepth 1 --extension "${font_ext}" --exec basename | sort); do
     # Iterate on each font based on the text input
     # shellcheck disable=SC2030
     output_font=$(
@@ -67,7 +69,7 @@ else
   printf "\n"
   # shellcheck disable=SC2031
   figlet "-${custom_justification:=x}" \
-    -d "${custom_font_dir}" \
+    -d "${font_directory}" \
     -w "${custom_width:-}" \
     -f "${custom_font}" \
     "${custom_text}"
