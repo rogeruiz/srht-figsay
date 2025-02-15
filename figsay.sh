@@ -49,7 +49,7 @@ if [ -z "${custom_font}" ]; then
     # shellcheck disable=SC2030
     output_font=$(
       figlet "-${custom_justification:=x}" \
-        -d "${custom_font_dir}" \
+        -d "${font_directory}" \
         -w "${custom_width:-}" \
         -f "${font_path}" \
         "${custom_text}" \
