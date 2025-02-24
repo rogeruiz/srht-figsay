@@ -16,6 +16,6 @@ build:
 uninstall:
     nix profile remove figsay
 
-[doc('Install figsay so it can be run anywhere')]
+[doc('Install Figsay so it can be installed in your $PATH')]
 install:
     nix profile install
