@@ -2,7 +2,7 @@
 
 > 👀 **Look here**
 >
-> Can't read Spanish? [Click here to read this in English](/README.en.md).
+> Can't read Spanish? [Click here to read this in English](https://git.sr.ht/~rogeruiz/figsay/tree/main/item/README.en.md).
 
 La aplicación `figsay` es un herramienta CLI que produce texto en la forma de
 arte de ASCII con fuentes compatible con FIGlet. Las fuentes incluidas con

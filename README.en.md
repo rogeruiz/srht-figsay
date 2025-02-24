@@ -2,7 +2,7 @@
 
 > 👀 **Pilla esto**
 >
-> ¿No puedes leer inglés? [Haga clic aquí pa' leerlo en español](/README.md).
+> ¿No puedes leer inglés? [Haga clic aquí pa' leerlo en español](https://git.sr.ht/~rogeruiz/figsay/tree/main/item/README.md).
 
 The `figsay` application is a CLI-tool that produces text in ASCII-art form with
 FIGlet compatible fonts. The fonts included with `figsay` were copied from
