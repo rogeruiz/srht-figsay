@@ -3,13 +3,19 @@ packages:
   - nixos.just
   - nixos.nix
   - nixos.coreutils
+secrets:
+  - 5fd6bbf1-8791-4c37-8e1f-2d423d1c6a12
 environment:
   NIX_CONFIG: "experimental-features = nix-command flakes"
+  GH_REPO: srht-figsay
+  GH_USER: rogeruiz
+  SH_REPO: figsay
 tasks:
   - setup: |
       nix --version
       just --version
   - check: |
+      pushd "${SH_REPO}"
       just check
       just check-outputs
   - mirror-to-github: |
