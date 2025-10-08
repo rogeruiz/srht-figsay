@@ -13,44 +13,57 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      overlays = {
+        default = final: prev: {
+          figsay-fonts =
+            with final;
+            stdenv.mkDerivation {
+              name = "figsay-fonts-${version}";
+              license = final.lib.licenses.cc0.shortName;
+              src = ./.;
+              dontUnpack = true;
+              dontBuild = true;
+              installPhase = ''
+                mkdir -p $out/share
+                cp -r $src/fonts $out/share/fonts
+              '';
+            };
+          figsay-script =
+            with final;
+            writeShellApplication {
+              name = "figsay";
+
+              runtimeInputs = [
+                figlet
+                ripgrep
+                fd
+              ];
+
+              text = builtins.readFile ./figsay.sh;
+            };
+
+          figsay-all =
+            with final;
+            symlinkJoin {
+              name = "figsay-all";
+              paths = [
+                figsay-script
+                figsay-fonts
+              ];
+              license = final.lib.licenses.cc0.shortName;
+            };
+        };
+      };
       nixpkgsFor = forAllSystems (
         system:
         import nixpkgs {
           inherit system;
-          overlays = [ self.overlay ];
+          overlays = [ self.overlays.default ];
         }
       );
     in
     {
-      overlay = final: prev: {
-        figsay-fonts = with final; stdenv.mkDerivation {
-          name = "figsay-fonts-${version}";
-          src = ./.;
-          unpackPhase = "true";
-          buildPhase = ":";
-          installPhase = ''
-            mkdir -p $out/share
-            cp -r $src/fonts $out/share/fonts
-          '';
-        };
-        figsay-script = with final; writeShellApplication {
-          name = "figsay";
-
-          runtimeInputs = [
-            figlet
-            ripgrep
-            fd
-          ];
-
-          text = builtins.readFile ./figsay.sh;
-        };
-
-        figsay-all = with final; symlinkJoin
-          {
-            name = "figsay-all";
-            paths = [ figsay-script figsay-fonts ];
-          };
-      };
+      overlays = overlays;
       packages = forAllSystems (system: rec {
         inherit (nixpkgsFor.${system}) figsay-all;
         default = figsay-all;
