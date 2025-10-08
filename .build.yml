@@ -1,11 +1,17 @@
-image: alpine/latest
-secrets:
-  - 5fd6bbf1-8791-4c37-8e1f-2d423d1c6a12
+image: nixos/unstable
+packages:
+  - just
+  - nix
+  - coreutils
 environment:
-  GH_REPO: srht-figsay
-  GH_USER: rogeruiz
-  SH_REPO: figsay
+  NIX_CONFIG: "experimental-features = nix-command flakes"
 tasks:
+  - setup: |
+      nix --version
+      just --version
+  - check: |
+      just check
+      just check-outputs
   - mirror-to-github: |
       cd ~/"${SH_REPO}"
       git config --global credential.helper store
