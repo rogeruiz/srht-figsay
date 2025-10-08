@@ -1,8 +1,8 @@
 image: nixos/unstable
 packages:
-  - just
-  - nix
-  - coreutils
+  - nixos.just
+  - nixos.nix
+  - nixos.coreutils
 environment:
   NIX_CONFIG: "experimental-features = nix-command flakes"
 tasks:
